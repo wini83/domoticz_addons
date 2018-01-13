@@ -9,7 +9,6 @@ url = "https://airapi.airly.eu/v1/mapPoint/measurements?latitude=52.39&longitude
 apikey = "9658b2b3da0d45848fb1b312daccad29"
 normPm10 = 50
 normPM25 = 25
-
 lcdRow = 4
 
 lcdUrl = "http://192.168.1.200/control?cmd=lcd,"
