@@ -6,6 +6,7 @@ import signal
 import sys
 
 
+
 tab = [17,27]
 text = sys.argv[1]
 print "Announce: "+text+"..."
