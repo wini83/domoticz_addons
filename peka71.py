@@ -10,6 +10,7 @@ import json
 import urllib2
 import time
 import urllib
+from lcdbridge import LCDBridge
 
 LCD_ROW = 3
 LCD_IP = "192.168.1.200"
@@ -38,13 +39,20 @@ def peka_vm_get(met,p0):
 
 #print json.dumps(peka_vm_get('getBollardsByStopPoint','{"name":"IPN"}'), indent=4, sort_keys=True)
 
-ipn01 = peka_vm_get('getTimes','{"symbol":"IPNZ01"}')
-ipn02 = peka_vm_get('getTimes','{"symbol":"IPNZ02"}')
+def get_1st_departure(bollard):
+    json_data = peka_vm_get('getTimes','{"symbol":"'+bollard+'"}')
+    try:
+        departure = json_data["success"]["times"][0]
+        
+        result = '{}>{}:{}m'.format(departure["line"],departure["direction"].encode('UTF-8')[0:12],departure["minutes"])
+        return result
+    except:
+        return "error"
 
-l1 = ipn01["success"]["times"][0]
-l2 = ipn02["success"]["times"][0]
-#print (json.dumps(l1, indent=4, sort_keys=True, ensure_ascii=False).encode('UTF-8'))
-print('{}>{}:{}m'.format(l1["line"],l1["direction"].encode('UTF-8'),l1["minutes"]))
-print('{}>{}:{}m'.format(l2["line"],l2["direction"].encode('UTF-8'),l2["minutes"]))
+display = LCDBridge()
+display.send2LCD(3, 1, get_1st_departure("IPNZ01"))
+
+
+
 
 
