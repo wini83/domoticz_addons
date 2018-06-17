@@ -41,6 +41,6 @@ l1 = ipn01["success"]["times"][0]
 l2 = ipn02["success"]["times"][0]
 #print (json.dumps(l1, indent=4, sort_keys=True, ensure_ascii=False).encode('UTF-8'))
 print('{}>{}:{}m'.format(l1["line"],l1["direction"].encode('UTF-8'),l1["minutes"]))
-print('{} > {} : {} min'.format(l2["line"],l2["direction"].encode('UTF-8'),l2["minutes"]))
+print('{}>{}:{}m'.format(l2["line"],l2["direction"].encode('UTF-8'),l2["minutes"]))
 
 
