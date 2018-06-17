@@ -37,10 +37,10 @@ pm10 = data["currentMeasurements"]["pm10"]
 ergebnis = 'PM10:{:.0%} PM25:{:.0%}'.format(pm10/normPm10,pm25/normPM25)
 print (ergebnis)
 
-urlOut = lcdUrl+str(lcdRow)+",1,"+urllib2.quote(ergebnis)
+from lcdbridge import LCDBridge
 
-#print(urlOut)
+lcd = LCDBridge()
 
-request2 = urllib2.Request(urlOut)
-response2 = urllib2.urlopen(request2)
+lcd.send2LCD(4, 1, ergebnis)
+
 

@@ -11,9 +11,13 @@ import urllib2
 import time
 import urllib
 
+LCD_ROW = 3
+LCD_IP = "192.168.1.200"
+PEKA_URL
+
 
 def now_milliseconds():
-  return int(time.time() * 1000)
+    return int(time.time() * 1000)
 
 lcdUrl = "http://192.168.1.200/control?cmd=lcd,"
 
