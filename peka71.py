@@ -13,7 +13,7 @@ import urllib
 
 LCD_ROW = 3
 LCD_IP = "192.168.1.200"
-PEKA_URL
+PEKA_URL = "http://www.peka.poznan.pl/vm/method.vm?ts="
 
 
 def now_milliseconds():
@@ -22,7 +22,7 @@ def now_milliseconds():
 lcdUrl = "http://192.168.1.200/control?cmd=lcd,"
 
 def peka_vm_get(met,p0):
-    url = "http://www.peka.poznan.pl/vm/method.vm?ts="+str(now_milliseconds())
+    url = PEKA_URL+str(now_milliseconds())
     headers = {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"}
     payload = urllib.urlencode({'method' : met,
                                 'p0'  : p0})
