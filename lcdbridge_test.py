@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 17 cze 2018
 
@@ -7,4 +8,5 @@ from lcdbridge import LCDBridge
 
 dut = LCDBridge()
 
-dut.send2LCD(3, 1, "Dupa")
+dut.send2LCD(3, 1, "Dupą")
+

@@ -34,7 +34,7 @@ pm10 = data["currentMeasurements"]["pm10"]
 #print(pm25)
 #print(pm10Percentage)
 
-ergebnis = 'PM10:{:.0%} PM25:{:.0%}'.format(pm10/normPm10,pm25/normPM25)
+ergebnis = 'PM10:{:.0%} PM25:{:.0%}'.format(pm10/normPm10,pm25/normPM25).center(20)
 print (ergebnis)
 
 from lcdbridge import LCDBridge

@@ -49,8 +49,10 @@ def get_1st_departure(bollard):
     except:
         return "error"
 
+text2send = get_1st_departure("IPNZ01")
+print(text2send)
 display = LCDBridge()
-display.send2LCD(3, 1, get_1st_departure("IPNZ01"))
+display.send2LCD(3, 1, text2send)
 
 
 
