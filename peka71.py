@@ -44,7 +44,7 @@ def get_1st_departure(bollard):
     try:
         departure = json_data["success"]["times"][0]
         
-        result = '{}>{}:{}m'.format(departure["line"],departure["direction"].encode('UTF-8')[0:12],departure["minutes"])
+        result = '{}>{}:{}m'.format(departure["line"],departure["direction"].encode('UTF-8')[0:14],departure["minutes"])
         return result
     except:
         return "error"
