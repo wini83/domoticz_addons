@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 import urllib2
-import string
-from unidecode import unidecode
 import unicodedata
 '''
 Created on 17 cze 2018
