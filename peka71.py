@@ -11,6 +11,8 @@ import urllib2
 import time
 import urllib
 from lcdbridge import LCDBridge
+import string
+from test.test_bufio import lengths
 
 LCD_ROW = 3
 LCD_IP = "192.168.1.200"
@@ -39,17 +41,47 @@ def peka_vm_get(met,p0):
 
 #print json.dumps(peka_vm_get('getBollardsByStopPoint','{"name":"IPN"}'), indent=4, sort_keys=True)
 
-def get_1st_departure(bollard):
+def get_1st_departure_json(bollard):
     json_data = peka_vm_get('getTimes','{"symbol":"'+bollard+'"}')
     try:
         departure = json_data["success"]["times"][0]
-        
-        result = '{}>{}:{}m'.format(departure["line"],departure["direction"].replace(" ", "").encode('UTF-8')[0:7],departure["minutes"]).ljust(15," ")
-        return result
+        return departure
     except:
-        return "error".ljust(15," ")
+        return "error"#.ljust(15," ")
+    
+def get_1st_departure_20char(bollard):
+    departure = get_1st_departure_json(bollard)
+    if(departure != "error"):
+        line_len = len(departure["line"])
+        minutes_len = len(str(departure["minutes"]))
+        direction = departure["direction"].replace(" ", "").encode('UTF-8')[0:10].translate(None,string.punctuation)
+        line = departure["line"]
+        minutes = departure["minutes"]
+        result = '{}>{}:{}'.format(line,direction,minutes).ljust(20," ")
+        return result
+    else:
+        return "error".ljust(20," ")
+    
+def get_1st_departure_xchar(bollard,length):
+    departure = get_1st_departure_json(bollard)
+    if(departure != "error"):
+        line_len = len(departure["line"])
+        minutes_len = len(str(departure["minutes"]))
+        length = length - line_len - minutes_len - 1
+        direction = departure["direction"].replace(" ", "")
+        direction = direction.encode('UTF-8').translate(None,string.punctuation)[0:length]
+        line = departure["line"]
+        minutes = departure["minutes"]
+        result = '{}>{}:{}'.format(line,direction,minutes)#.ljust(length-," ")
+        return result
+    else:
+        return "error".ljust(length," ")
 
-text2send = get_1st_departure("IPNZ01")
+part1 = get_1st_departure_xchar("IPNZ01",9)
+
+part2 = get_1st_departure_xchar("IPNZ02",9)
+
+text2send = '{} {}'.format(part1,part2)
 print(text2send)
 display = LCDBridge()
 display.send2LCD(3, 1, text2send)
