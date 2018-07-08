@@ -12,7 +12,6 @@ import time
 import urllib
 from lcdbridge import LCDBridge
 import string
-from test.test_bufio import lengths
 
 LCD_ROW = 3
 LCD_IP = "192.168.1.200"
