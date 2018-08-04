@@ -11,6 +11,7 @@ import urllib.request
 import time
 from lcdbridge import LCDBridge
 import string
+import codecs
 
 LCD_ROW = 3
 LCD_IP = "192.168.1.200"
@@ -29,9 +30,11 @@ def peka_vm_get(met,p0):
                                 'p0'  : p0}).encode("utf-8")
     req = urllib.request.Request(url, payload, headers)
     response = urllib.request.urlopen(req)
+    
+    reader = codecs.getreader("utf-8")
 
     # Parse Json
-    data = json.load(response)
+    data = json.load(reader(response))
     return data
 
 # Preety print the result

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import json
 import urllib.request
+import codecs
 
 # open the url and the screen name 
 # (The screen name is the screen name of the user for whom to return results for)
@@ -17,9 +18,9 @@ request = urllib.request.Request(url)
 request.add_header("apikey", apikey)
 response = urllib.request.urlopen(request)
 
+reader = codecs.getreader("utf-8")
 
-
-data = json.load(response)
+data = json.load(reader(response))
 
 # print the result
 #print (data)
