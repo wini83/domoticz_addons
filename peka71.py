@@ -65,9 +65,10 @@ def get_1st_departure_xchar(bollard,length):
     if(departure != "error"):
         line_len = len(departure["line"])
         minutes_len = len(str(departure["minutes"]))
-        length = length - line_len - minutes_len - 1
+        length = length - line_len - minutes_len - 2 # 2 char for separators
         direction = departure["direction"].replace(" ", "")
-        direction = direction.translate(string.punctuation)[0:length]
+        translator = str.maketrans('', '', string.punctuation)
+        direction = direction.translate(translator)[0:length]
         line = departure["line"]
         minutes = departure["minutes"]
         result = '{}>{}:{}'.format(line,direction,minutes)
@@ -79,9 +80,12 @@ part1 = get_1st_departure_xchar("IPNZ01",9)
 
 part2 = get_1st_departure_xchar("IPNZ02",9)
 
-text2send = '{} {}'.format(part1,part2)
-print(text2send.encode('UTF-8'))
+text2send = '{}  {}'.format(part1,part2)
+print(len(part1))
+print(len(part2))
+print("{} + {} + 2 (space) = {}".format(len(part1),len(part2),len(text2send)))
 display = LCDBridge()
+print(display.remove_accents(text2send))
 display.send2LCD(3, 1, text2send)
 
 
