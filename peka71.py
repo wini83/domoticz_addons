@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
 Created on 2 sty 2018
@@ -29,10 +28,8 @@ def peka_vm_get(met,p0):
     payload = urllib.parse.urlencode({'method' : met,
                                 'p0'  : p0}).encode("utf-8")
     req = urllib.request.Request(url, payload, headers)
-    response = urllib.request.urlopen(req)
-    
+    response = urllib.request.urlopen(req)   
     reader = codecs.getreader("utf-8")
-
     # Parse Json
     data = json.load(reader(response))
     return data
@@ -83,7 +80,7 @@ part1 = get_1st_departure_xchar("IPNZ01",9)
 part2 = get_1st_departure_xchar("IPNZ02",9)
 
 text2send = '{} {}'.format(part1,part2)
-print(text2send.encode('utf-8'))
+print(text2send)
 display = LCDBridge()
 display.send2LCD(3, 1, text2send)
 
