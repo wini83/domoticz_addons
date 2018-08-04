@@ -1,5 +1,6 @@
+#!/usr/bin/python3
 import json
-import urllib2
+import urllib.request
 
 # open the url and the screen name 
 # (The screen name is the screen name of the user for whom to return results for)
@@ -12,9 +13,9 @@ normPM25 = 25
 lcdRow = 4
 
 lcdUrl = "http://192.168.1.200/control?cmd=lcd,"
-request = urllib2.Request(url)
+request = urllib.request.Request(url)
 request.add_header("apikey", apikey)
-response = urllib2.urlopen(request)
+response = urllib.request.urlopen(request)
 
 
 

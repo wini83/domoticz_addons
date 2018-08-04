@@ -7,9 +7,8 @@ Created on 2 sty 2018
 '''
 
 import json
-import urllib2
+import urllib.request
 import time
-import urllib
 from lcdbridge import LCDBridge
 import string
 
@@ -26,10 +25,10 @@ lcdUrl = "http://192.168.1.200/control?cmd=lcd,"
 def peka_vm_get(met,p0):
     url = PEKA_URL+str(now_milliseconds())
     headers = {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"}
-    payload = urllib.urlencode({'method' : met,
-                                'p0'  : p0})
-    req = urllib2.Request(url, payload, headers)
-    response = urllib2.urlopen(req)
+    payload = urllib.parse.urlencode({'method' : met,
+                                'p0'  : p0}).encode("utf-8")
+    req = urllib.request.Request(url, payload, headers)
+    response = urllib.request.urlopen(req)
 
     # Parse Json
     data = json.load(response)
@@ -53,7 +52,7 @@ def get_1st_departure_20char(bollard):
     if(departure != "error"):
         line_len = len(departure["line"])
         minutes_len = len(str(departure["minutes"]))
-        direction = departure["direction"].replace(" ", "").encode('UTF-8')[0:10].translate(None,string.punctuation)
+        direction = departure["direction"].replace(" ", "").encode('UTF-8')[0:10].translate(string.punctuation)
         line = departure["line"]
         minutes = departure["minutes"]
         result = '{}>{}:{}'.format(line,direction,minutes).ljust(20," ")
@@ -68,10 +67,10 @@ def get_1st_departure_xchar(bollard,length):
         minutes_len = len(str(departure["minutes"]))
         length = length - line_len - minutes_len - 1
         direction = departure["direction"].replace(" ", "")
-        direction = direction.encode('UTF-8').translate(None,string.punctuation)[0:length]
+        direction = direction.translate(string.punctuation)[0:length]
         line = departure["line"]
         minutes = departure["minutes"]
-        result = '{}>{}:{}'.format(line,direction,minutes)#.ljust(length-," ")
+        result = '{}>{}:{}'.format(line,direction,minutes)
         return result
     else:
         return "error".ljust(length," ")
