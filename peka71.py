@@ -81,8 +81,6 @@ part1 = get_1st_departure_xchar("IPNZ01",9)
 part2 = get_1st_departure_xchar("IPNZ02",9)
 
 text2send = '{}  {}'.format(part1,part2)
-print(len(part1))
-print(len(part2))
 print("{} + {} + 2 (space) = {}".format(len(part1),len(part2),len(text2send)))
 display = LCDBridge()
 print(display.remove_accents(text2send))
