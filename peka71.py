@@ -83,7 +83,7 @@ part1 = get_1st_departure_xchar("IPNZ01",9)
 part2 = get_1st_departure_xchar("IPNZ02",9)
 
 text2send = '{} {}'.format(part1,part2)
-print(text2send)
+print(text2send.encode('utf-8'))
 display = LCDBridge()
 display.send2LCD(3, 1, text2send)
 
