@@ -30,8 +30,15 @@ pm10 = data["currentMeasurements"]["pm10"]
 pm10_percentage = pm10/NORM_PM10
 pm25_percentage = pm25/NORM_PM25
 
-domobridge.set_value(PM10_IDX, pm10_percentage*100)
-domobridge.set_value(PM25_IDX, pm25_percentage*100)
+server = domobridge.Server(address="192.168.1.100", port="8050")
+
+dev_pm10 = domobridge.Device(server, PM10_IDX)
+dev_pm25 = domobridge.Device(server, PM25_IDX)
+
+dev_pm10.update(0,str(pm10_percentage*100))
+dev_pm25.update(0,str(pm25_percentage*100))
+
+
 ergebnis = 'PM10:{:.0%} PM25:{:.0%}'.format(pm10_percentage,pm25_percentage).center(20)
 print (ergebnis)
 
