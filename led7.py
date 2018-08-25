@@ -7,7 +7,7 @@ Created on 2 lip 2018
 import domobridge
 import urllib.request
 
-WILDA_IDX = 8
+WILDA_IDX = 4062
 ESP_IP = "192.168.1.240"
 
 
