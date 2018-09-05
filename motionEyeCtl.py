@@ -23,6 +23,7 @@ def is_switchOn(idx):
     try:
         server = dom.Server(address=DOMOTICZ_IP, port=DOMOTICZ_PORT)
         dev_cam_switch = dom.Device(server,idx)
+        print("{} Status = {}".format(dev_cam_switch.name,dev_cam_switch.data))
         if(dev_cam_switch.data == "On"):
             return True
         elif(dev_cam_switch.data == "Off"):
@@ -54,5 +55,5 @@ elif switch_status == True and motion_alive == False:
 elif switch_status == False and motion_alive == False:
     print ('Switch is Off and Service is inactive, no Action required.')
 else:
-    print ('Switch is On and Service is running, Stopping service...')
+    print ('Switch is Off and Service is running, Stopping service...')
     service_ctl("stop")
