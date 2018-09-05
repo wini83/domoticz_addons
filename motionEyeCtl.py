@@ -44,10 +44,11 @@ def service_ctl(command):
         
 def motion_detection_ctl(command):
     if command == "start":
-        with urllib.request.urlopen('http://python.org/') as response:
+        with urllib.request.urlopen('http://127.0.0.1:7999/1/detection/pause') as response:
             html = response.read()
     elif command == "stop":
-        os.system("sudo systemctl stop motioneye")
+        with urllib.request.urlopen('http://127.0.0.1:7999/1/detection/pause') as response:
+            html = response.read()
     else:
         print ("kto to spieprzyl?")
             
@@ -60,14 +61,18 @@ camswitch_status = is_switchOn(CAM_SWITCH_IDX)
 
 
 if (camswitch_status):
-    print ('Camera Switch in Domoticz is On')
     if(motioneye_alive):
         print("MotionEye is running")
     else:
         print("MotionEye is inactive, Starting motionEye...")
         service_ctl("start")
+    if(is_switchOn(MOTION_SWITCH_IDX)):
+        print("Starting Motion Detection")
+        motion_detection_ctl("start")
+    else:
+        print("Pausing Motion Detection")
+        motion_detection_ctl("stop")
 else:
-    print ('Camera Switch in Domoticz is Off')
     if(motioneye_alive):
         print("MotionEye is running, Stopping motionEye...")
         service_ctl("stop")
