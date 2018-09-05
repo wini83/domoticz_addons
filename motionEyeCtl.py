@@ -35,7 +35,7 @@ def is_switchOn(idx):
         
 def service_ctl(command):
     if command == "start":
-        os.system("sudo systemctl stop motioneye")
+        os.system("sudo systemctl start motioneye")
     elif command == "stop":
         os.system("sudo systemctl stop motioneye")
     else:
