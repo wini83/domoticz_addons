@@ -3,9 +3,10 @@
 import domobridge as dom
 import socket
 import os
+import urllib.request
 
 CAM_SWITCH_IDX = 1094
-MOTION_SWITCH_IDX = 9999
+MOTION_SWITCH_IDX = 4252
 
 DOMOTICZ_IP = "192.168.1.100"
 DOMOTICZ_PORT = "8050"
@@ -39,21 +40,37 @@ def service_ctl(command):
     elif command == "stop":
         os.system("sudo systemctl stop motioneye")
     else:
-        print ("kto to spieprzyl")
+        print ("kto to spieprzyl?")
+        
+def motion_detection_ctl(command):
+    if command == "start":
+        with urllib.request.urlopen('http://python.org/') as response:
+            html = response.read()
+    elif command == "stop":
+        os.system("sudo systemctl stop motioneye")
+    else:
+        print ("kto to spieprzyl?")
             
     
-motion_alive = is_Open("127.0.0.1", 8765)
-switch_status = is_switchOn(CAM_SWITCH_IDX)
+motioneye_alive = is_Open("127.0.0.1", 8765)
+camswitch_status = is_switchOn(CAM_SWITCH_IDX)
 
 
 
-if switch_status == True and motion_alive == True:
-    print ('Switch is On and Service is running, no Action required.')
-elif switch_status == True and motion_alive == False:
-    print ('Switch is On and Service is inactive, Starting service...')
-    service_ctl("start")
-elif switch_status == False and motion_alive == False:
-    print ('Switch is Off and Service is inactive, no Action required.')
+
+
+if (camswitch_status):
+    print ('Camera Switch in Domoticz is On')
+    if(motioneye_alive):
+        print("MotionEye is running")
+    else:
+        print("MotionEye is inactive, Starting motionEye...")
+        service_ctl("start")
 else:
-    print ('Switch is Off and Service is running, Stopping service...')
-    service_ctl("stop")
+    print ('Camera Switch in Domoticz is Off')
+    if(motioneye_alive):
+        print("MotionEye is running, Stopping motionEye...")
+        service_ctl("stop")
+    else:
+        print("MotionEye is inactive")
+    
