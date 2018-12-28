@@ -6,7 +6,7 @@ import domobridge
 import lcdbridge
 
 URL = "https://airapi.airly.eu/v1/mapPoint/measurements?latitude=52.39&longitude=16.89&historyHours=24"
-API_KEY: str = "9658b2b3da0d45848fb1b312daccad29"
+API_KEY = "9658b2b3da0d45848fb1b312daccad29"
 NORM_PM10 = 50
 NORM_PM25 = 25
 LCD_ROW = 4
