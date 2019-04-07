@@ -8,9 +8,6 @@ import domobridge
 import urllib.request
 
 WILDA_IDX = 5919
-
-
->>>>>>> branch 'master' of https://github.com/wini83/domoticz_addons.git
 ESP_IP = "192.168.1.204"
 
 
