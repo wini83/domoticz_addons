@@ -12,6 +12,7 @@ from lcdbridge import LCDBridge
 import string
 import codecs
 
+
 LCD_ROW = 3
 LCD_IP = "192.168.1.200"
 PEKA_URL = "http://www.peka.poznan.pl/vm/method.vm?ts="
