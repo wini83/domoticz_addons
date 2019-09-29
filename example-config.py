@@ -1,3 +1,3 @@
-zwift_username = 'mariusz.wincior@gmail.com'
-zwift_password = 'fidelio1'
-zwift_player_id = 2690
+zwift_username = 'user@somwhere.com'
+zwift_password = 'pass'
+zwift_player_id = 1000
