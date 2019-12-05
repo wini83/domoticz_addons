@@ -11,7 +11,7 @@ from pekaVMonitor import pekaVMonitor
 
 
 LCD_ROW = 3
-LCD_IP = "192.168.1.200"
+LCD_IP = "192.168.2.200"
 
 monitor = pekaVMonitor()
 

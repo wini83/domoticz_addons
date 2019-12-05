@@ -9,7 +9,7 @@ import urllib.request
 import datetime
 
 WILDA_IDX = 5919
-ESP_IP = "192.168.1.204"
+ESP_IP = "192.168.2.204"
 
 
 def LEDPrint(value):
@@ -21,7 +21,7 @@ def LEDPrint(value):
     #data = json.load(reader(response))
     #return data
 
-server = domobridge.Server(address="192.168.1.100", port="8050")
+server = domobridge.Server(address="192.168.2.100", port="8050")
 dev1 = domobridge.Device(server, WILDA_IDX)
 
 temperature = dev1.temp

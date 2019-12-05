@@ -6,9 +6,9 @@ Created on 17 cze 2018
 
 @author: Mariusz Wincior
 '''
-#lcdUrl = "http://192.168.1.200/control?cmd=lcd,"
+#lcdUrl = "http://192.168.2.200/control?cmd=lcd,"
 class LCDBridge:
-    lcd_ip = "192.168.1.200"
+    lcd_ip = "192.168.2.200"
     lcd_rows = 4
     lcd_cols = 20
     def send2LCD(self, row,col, payload):
