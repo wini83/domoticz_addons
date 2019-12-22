@@ -2,6 +2,7 @@
 import json
 import domobridge
 import lcdbridge
+import config
 
 
 
@@ -10,7 +11,7 @@ PM10_IDX = 5940
 PM25_IDX = 5939
 
 
-server = domobridge.Server(address="192.168.2.100", port="8050")
+server = domobridge.Server(address=config.domoticz_port, port=config.domoticz_port)
 
 dev_pm10 = domobridge.Device(server, PM10_IDX)
 dev_pm25 = domobridge.Device(server, PM25_IDX)
