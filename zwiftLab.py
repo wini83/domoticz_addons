@@ -32,23 +32,27 @@ def get_players_in_world(world_obj):
     players = world_obj.players
     return players['friendsInWorld']
 
+def print_1stplayerpowandcad(client):
+    world = get_world(_client)
 
-world = get_world(_client)
+    firstPlayer_id = get_players_in_world(world)[0]["playerId"]
 
-firstPlayer_id = get_players_in_world(world)[0]["playerId"]
+    status = world.player_status(firstPlayer_id)
 
-status = world.player_status(firstPlayer_id)
+    power = status.power
 
-power = status.power
+    cadence = status.cadence
 
-cadence = status.cadence
+    print(power)
+    print(cadence)
 
-print(power)
-print(cadence)
 
-# json = json.dumps(players)
-# f = open("dict.json","w")
-# f.write(json)
-# f.close()
 
-# print(players)
+profile = get_profile(_client)
+
+is_riding = profile["riding"]
+
+print(is_riding)
+
+
+#pretty_print(profile)
