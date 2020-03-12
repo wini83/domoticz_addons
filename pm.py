@@ -9,7 +9,7 @@ PM10_IDX = 5940
 PM25_IDX = 5939
 
 
-server = dom.Server(address=config.domoticz_port, port=config.domoticz_port)
+server = dom.Server(address=config.domoticz_ip, port=config.domoticz_port)
 
 dev_pm10 = dom.Device(server, PM10_IDX)
 dev_pm25 = dom.Device(server, PM25_IDX)
