@@ -22,7 +22,7 @@ def led_print(value):
     # return data
 
 
-server = dom.Server(address="192.168.2.100", port="8050")
+server = dom.Server("192.168.2.100","8050")
 dev1 = dom.Device(server, WILDA_IDX)
 
 temperature = dev1.temp
