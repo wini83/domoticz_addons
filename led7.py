@@ -38,4 +38,4 @@ print("Temperature: {}".format(temperature))
 if delta > 180:
     temperature = 99
 
-#led_print(temperature)
+led_print(temperature)
