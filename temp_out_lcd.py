@@ -14,7 +14,7 @@ server = dom.Server(address=config.domoticz_ip, port=config.domoticz_port)
 dev_openweather_ws = dom.Device(server, openweather)
 
 
-print(openweather.data)
+print(dev_openweather_ws.data)
 
 #pm10_percentage = float(dev_pm10.data.strip('%')) / 100.0
 
