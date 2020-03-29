@@ -16,6 +16,10 @@ dev_openweather_ws = dom.Device(server, openweather)
 
 print(dev_openweather_ws.data)
 
+print(dev_openweather_ws.temp)
+
+print(dev_openweather_ws.barometer)
+
 #pm10_percentage = float(dev_pm10.data.strip('%')) / 100.0
 
 
