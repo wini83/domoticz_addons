@@ -7,13 +7,13 @@ Created on 2 sty 2018
 
 from lcdbridge import LCDBridge
 
-from pekaVMonitor import pekaVMonitor
+from pekaVmonitor import pekaVmonitor
 
 
 LCD_ROW = 3
 LCD_IP = "192.168.2.200"
 
-monitor = pekaVMonitor()
+monitor = pekaVmonitor()
 
 odjazd1 = monitor.get_1st_departure("IPNZ01")
 
