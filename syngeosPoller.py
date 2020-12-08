@@ -8,10 +8,7 @@ SYNGEOS_URL = "https://api.syngeos.pl/api/public/data/device/"
 
 
 
-UNIT_TEMP = "°C"
-UNIT_HUM = "%"
-UNIT_air_pressure = "hPa"
-UNIT_PM = "µg/m³"
+
 
 def pretty_print(payload):
     pp = pprint.PrettyPrinter(indent=4)
@@ -25,6 +22,10 @@ class NotInitiatedException(Exception):
 
 
 class SyngeosPoller:
+    UNIT_TEMP = "°C"
+    UNIT_HUM = "%"
+    UNIT_air_pressure = "hPa"
+    UNIT_PM = "µg/m³"
     def __init__(self, deviceId):
         self.initiated = False
         self.temperature = 0
