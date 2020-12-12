@@ -35,7 +35,7 @@ dev_hum.update(poller.humidity, None, None, None)
 
 
 dev_air_press = dom.Device(server, config.syngeos_air_pressure_idx)
-dev_air_press.update(0, poller.air_pressure, None, None)
+dev_air_press.update(0, "{};{}".format(poller.air_pressure, 0), None, None)
 
 dev_pm_2_5_norm = dom.Device(server, config.syngeos_pm_2_5_norm)
 dev_pm_2_5_norm.update(0, poller.pm2_5_percentage, None, None)
