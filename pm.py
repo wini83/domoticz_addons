@@ -3,7 +3,7 @@
 import config
 import DomoticzAPI as dom
 
-import lib
+from lib import lcdbridge
 
 LCD_ROW = 4
 PM10_IDX = 5940
@@ -23,6 +23,6 @@ pm25_percentage = float(dev_pm25.data.strip('%')) / 100.0
 ergebnis = 'PM10:{:.0%} PM25:{:.0%}'.format(pm10_percentage, pm25_percentage).center(20)
 print(ergebnis)
 
-lcd = lib.LCDBridge()
+lcd = lcdbridge.LCDBridge()
 
 lcd.send2LCD(4, 1, ergebnis)
