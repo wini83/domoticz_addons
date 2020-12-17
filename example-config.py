@@ -11,3 +11,5 @@ syngeos_hum_idx = 7116
 syngeos_air_pressure_idx = 7117
 syngeos_pm_2_5_norm = 7113
 syngeos_pm_10_norm = 7114
+
+camera_cpu_temp_idx = 1099
