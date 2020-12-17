@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import config
-import lcdbridge
+from lib import lcdbridge
 import DomoticzAPI as dom
 
 LCD_ROW = 2

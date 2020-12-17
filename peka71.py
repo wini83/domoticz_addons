@@ -5,9 +5,9 @@ Created on 2 sty 2018
 
 '''
 
-from lcdbridge import LCDBridge
+from lib.lcdbridge import LCDBridge
 
-from pekaVmonitor import pekaVmonitor
+from lib.pekaVmonitor import pekaVmonitor
 
 
 LCD_ROW = 3

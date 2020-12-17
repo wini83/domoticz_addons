@@ -34,7 +34,7 @@ client.on_message = on_message
 client.username_pw_set("wini", password="dupa")
 client.connect("192.168.2.100", 1883, 60)
 
-real = True
+real = False
 
 set_sw(client, False, real)
 

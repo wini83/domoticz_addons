@@ -1,4 +1,4 @@
-from syngeosPoller import SyngeosPoller
+from lib.syngeosPoller import SyngeosPoller
 import DomoticzAPI as dom
 import config
 
