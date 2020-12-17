@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
 import config
-from lib import lcdbridge
 import DomoticzAPI as dom
+
+from lib import lcdbridge
 
 LCD_ROW = 4
 PM10_IDX = 5940
