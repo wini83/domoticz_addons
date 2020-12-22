@@ -28,4 +28,4 @@ dev_syngeos_pm25 = dom.Device(server, config.syngeos_pm_2_5_norm)
 lcd = lcdbridge.LCDBridge()
 
 lcd.send2LCD(3, 1, compose_row(dev_airly_pm10,dev_airly_pm25))
-lcd.send2LCD(3, 1, compose_row(dev_syngeos_pm10,dev_syngeos_pm25))
+lcd.send2LCD(4, 1, compose_row(dev_syngeos_pm10,dev_syngeos_pm25))
