@@ -67,12 +67,12 @@ if cam_switch_status:
     else:
         print("MotionEye is inactive, Starting motionEye...")
         service_ctl("start")
-    if is_switch_on(MOTION_SWITCH_IDX):
-        print("Starting Motion Detection")
-        motion_detection_ctl("start")
-    else:
-        print("Pausing Motion Detection")
-        motion_detection_ctl("stop")
+    # if is_switch_on(MOTION_SWITCH_IDX):
+    #     print("Starting Motion Detection")
+    #     motion_detection_ctl("start")
+    # else:
+    #     print("Pausing Motion Detection")
+    #     motion_detection_ctl("stop")
 else:
     if motioneye_alive:
         print("MotionEye is running, Stopping motionEye...")
