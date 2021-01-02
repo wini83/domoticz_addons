@@ -1,0 +1,4 @@
+-e git://github.com/Xorfor/Domoticz-API.git#egg=domoticzapi
+python-daemon
+zwift-client
+paho-mqtt

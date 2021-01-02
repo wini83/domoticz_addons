@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import domobridge as dom
+import DomoticzAPI as dom
 import socket
 import os
 import urllib.request
