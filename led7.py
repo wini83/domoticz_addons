@@ -8,7 +8,7 @@ import DomoticzAPI as dom
 import urllib.request
 import datetime
 
-WILDA_IDX = 7115
+WILDA_IDX = 5935
 ESP_IP = "192.168.2.204"
 
 
