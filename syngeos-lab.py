@@ -2,7 +2,7 @@ from lib.syngeosPoller import SyngeosPoller
 import DomoticzAPI as dom
 import config
 
-DEV_ID = 567
+DEV_ID = 111
 
 poller = SyngeosPoller(DEV_ID)
 
