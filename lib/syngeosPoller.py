@@ -4,7 +4,7 @@ import json
 import math
 import pprint
 import urllib.request
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 
 import geopy.distance
 
@@ -24,12 +24,13 @@ def pretty_print(payload):
 
 @dataclass
 class SyngeosDeviceListItem:
-    sensor_type: str
     id: int
     city: str
     address: str
     coordinates: Tuple[float, float]
-    distance:float
+    distance: float
+    slugs: List[str]
+
 
 class NotInitiatedException(Exception):
     def __init__(self, expression, message):
@@ -69,7 +70,17 @@ class SyngeosPoller:
         data = json.load(reader(response))
         return data
 
-
+    def get_nearby_sensors(self):
+        devices: Dict[int, SyngeosDeviceListItem] = {}
+        slugs = self.get_sensor_types()
+        for slug in slugs:
+            devices_of_slug = self.get_all_sensor_of_type(slug=slug["slug"])
+            for item in devices_of_slug:
+                if item.id in devices.keys():
+                    devices[item.id].slugs.append(slug["slug"])
+                else:
+                    devices[item.id] = item
+        return devices
 
     def get_all_sensor_of_type(self, slug: str):
         url = SYNGEOS_URL_ALL_SENSORS + slug
@@ -80,18 +91,18 @@ class SyngeosPoller:
         for item in data_raw:
             point = (item["device"]["coordinates"][0], item["device"]["coordinates"][1])
             new_item = SyngeosDeviceListItem(
-                slug,
                 item["device"]["id"],
                 item["device"]["city"],
                 item["device"]["address"],
                 point,
-                geopy.distance.geodesic(point, self.location).km
+                geopy.distance.geodesic(point, self.location).km,
+                [slug]
             )
             data.append(new_item)
 
-        data_filtered = filter(lambda x:x.distance <= TRESHOLD_DISTANCE, data)
+        data_filtered = filter(lambda x: x.distance <= TRESHOLD_DISTANCE, data)
         data_filtered = list(data_filtered)
-        data_filtered.sort(key=lambda x:x.distance)
+        data_filtered.sort(key=lambda x: x.distance)
         return data_filtered
 
     def get_all_devices(self):

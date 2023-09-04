@@ -2,3 +2,4 @@
 python-daemon
 zwift-client
 paho-mqtt
+geopy
