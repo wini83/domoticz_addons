@@ -1,1 +1,3 @@
-# domoticz_addons
+> ⚠️ **DEPRECATED**
+>
+> This repository is no longer maintained.
