@@ -1,10 +1,14 @@
-import json
-import urllib.request
-import time
-import string
-import codecs
+"""Small client for Poznań PEKA virtual departure monitor.
 
-PEKA_URL = "http://www.peka.poznan.pl/vm/method.vm?ts="
+The PEKA endpoint is unofficial and may change without notice.
+"""
+import json
+import string
+import time
+import urllib.parse
+import urllib.request
+
+PEKA_URL = "https://www.peka.poznan.pl/vm/method.vm?ts="
 
 
 def now_milliseconds():
@@ -12,51 +16,37 @@ def now_milliseconds():
 
 
 class pekaVmonitor:
+    """Keep the historical API for existing Domoticz integrations."""
 
     def peka_vm_get(self, met, p0):
         url = PEKA_URL + str(now_milliseconds())
-        headers = {"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"}
-        payload = urllib.parse.urlencode({'method': met,
-                                          'p0': p0}).encode("utf-8")
-        req = urllib.request.Request(url, payload, headers)
-        response = urllib.request.urlopen(req)
-        reader = codecs.getreader("utf-8")
-        # Parse Json
-        data = json.load(reader(response))
-        return data
+        headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
+        payload = urllib.parse.urlencode({"method": met, "p0": p0}).encode("utf-8")
+        request = urllib.request.Request(url, payload, headers=headers)
+
+        with urllib.request.urlopen(request, timeout=10) as response:
+            return json.load(response)
 
     def get_1st_departure_json(self, bollard):
-        json_data = self.peka_vm_get('getTimes', '{"symbol":"' + bollard + '"}')
+        data = self.peka_vm_get("getTimes", json.dumps({"symbol": bollard}))
         try:
-            departure = json_data["success"]["times"][0]
-            return departure
-        except:
-            return "error"  # .ljust(15," ")
+            return data["success"]["times"][0]
+        except (KeyError, IndexError, TypeError):
+            return "error"
 
     def get_1st_departure(self, bollard):
         departure = self.get_1st_departure_json(bollard)
-        if departure != "error":
-            direction = departure[
-                "direction"]  # .replace(" ", "")#.encode('UTF-8')#[0:10].translate(string.punctuation)
-            line = departure["line"]
-            minutes = departure["minutes"]
-            result = (line, direction, minutes)
-            return result
-        else:
+        if departure == "error":
             return "error"
+        return (departure["line"], departure["direction"], departure["minutes"])
 
     def get_1st_departure_xchar(self, bollard, length):
         departure = self.get_1st_departure(bollard)
-        if len(departure) != 1:
-            line_len = len(departure[0])
-            minutes_len = len(str(departure[2]))
-            length = length - line_len - minutes_len - 2  # 2 char for separators
-            direction = departure[1].replace(" ", "")
-            translator = str.maketrans('', '', string.punctuation)
-            direction = direction.translate(translator)[0:length]
-            line = departure[0]
-            minutes = departure[2]
-            result = '{}>{}:{}'.format(line, direction, minutes)
-            return result
-        else:
+        if departure == "error":
             return "error".ljust(length, " ")
+
+        line, direction, minutes = departure
+        available = max(0, length - len(str(line)) - len(str(minutes)) - 2)
+        translator = str.maketrans("", "", string.punctuation)
+        short_direction = direction.replace(" ", "").translate(translator)[:available]
+        return f"{line}>{short_direction}:{minutes}"
