@@ -27,7 +27,7 @@ def test_departure_and_short_format():
     result = {"success": {"times": [{"line": "16", "direction": "Os. Sobieskiego", "minutes": 4}]}}
     with patch.object(monitor, "peka_vm_get", return_value=result) as get:
         assert monitor.get_1st_departure("IPNZ02") == ("16", "Os. Sobieskiego", 4)
-        assert monitor.get_1st_departure_xchar("IPNZ02", 14) == "16>OsSobieski:4"
+        assert monitor.get_1st_departure_xchar("IPNZ02", 14) == "16>OsSobiesk:4"
     assert json.loads(get.call_args.args[1]) == {"symbol": "IPNZ02"}
 
 
