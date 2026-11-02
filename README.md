@@ -1,10 +1,14 @@
-> ⚠️ **LEGACY / LIMITED MAINTENANCE**
->
-> This repository contains older personal Domoticz add-ons. The PEKA helper has received a small maintenance refresh, but other integrations have not been audited for compatibility.
+# PEKA virtual monitor
 
-## PEKA virtual monitor
+This repository retains the historical PEKA virtual monitor helper. All other retired Domoticz scripts and their old runtime requirements have been moved into [archive/](archive/) for reference.
 
-`lib/pekaVmonitor.py` queries the unofficial PEKA virtual monitor endpoint and retains the original `pekaVmonitor` class and methods for compatibility.
+## Active code
+
+- [lib/pekaVmonitor.py](lib/pekaVmonitor.py) — PEKA virtual departure monitor client, retaining its original public API.
+- [tests/test_peka_vmonitor.py](tests/test_peka_vmonitor.py) — offline tests.
+- [pyproject.toml](pyproject.toml) — minimal uv-based development setup.
+
+The PEKA endpoint is unofficial. Its live availability and HTTPS support have **not** been verified.
 
 ```python
 from lib.pekaVmonitor import pekaVmonitor
@@ -12,8 +16,6 @@ from lib.pekaVmonitor import pekaVmonitor
 monitor = pekaVmonitor()
 print(monitor.get_1st_departure("IPNZ02"))
 ```
-
-The example requires network access and a valid PEKA bollard symbol. The live PEKA endpoint has **not** been verified as part of this cleanup. HTTPS is used; if that endpoint does not support HTTPS, it will need adjustment. Network errors raise exceptions, while an empty or unrecognized departure list returns `"error"` for backward compatibility.
 
 ## Development
 
@@ -25,8 +27,10 @@ uv run pytest
 uv run ruff check
 ```
 
-The `pyproject.toml` defines **development tools only**. It intentionally does not migrate the old runtime `requirements.txt` because the legacy Domoticz integrations may depend on older packages or environments. No packaging or installation of add-ons is implied by `uv sync`.
+The project has no external runtime dependencies. The optional developer environment includes pytest and Ruff.
 
-## Legacy dependencies
+## Archive
 
-`requirements.txt` is preserved for historical reference. Its `git://` dependency URL is outdated and should be reviewed before attempting to install the complete legacy stack.
+The [archive/](archive/) directory contains old, unmaintained Domoticz scripts, earlier experiments, sample configuration and historical `requirements.txt`. Its contents are **not** installed, tested or supported. Do not use the archived examples as production configuration; review them before reuse.
+
+To restore an old script, retrieve it from Git history or `archive/` and audit its dependencies first.
